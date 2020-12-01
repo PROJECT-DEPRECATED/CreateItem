@@ -13,7 +13,7 @@ This is Minecraft Paper API Plugin for Groovy
 
 ## API License
 This API uses the GPL-3.0 open source license.
-* License: [InventoryGUI License](https://github.com/ProjectTL12345/CreateItem/blob/master/LICENSE)
+* License: [CreateItem License](https://github.com/ProjectTL12345/CreateItem/blob/master/LICENSE)
 
 ## How to use this API in server
 This is a dependency library, you must add this API to use the plugin using this dependency library.
