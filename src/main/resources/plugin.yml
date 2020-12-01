@@ -1,0 +1,10 @@
+name: CreateItem
+author: Project_TL
+version: 1.0v
+api-version: 1.16
+main: org.projecttl.api.createitem.CreateItemAPI
+
+commands:
+  createItem:
+    description: This is example
+    usage: /createItem <Example List>
