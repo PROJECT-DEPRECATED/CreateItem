@@ -1,8 +1,15 @@
 # CreateItem
 This is Minecraft Paper API Plugin for Groovy
 
+* [API Feauture](https://github.com/ProjectTL12345/CreateItem#api-feature)
+* [API License](https://github.com/ProjectTL12345/CreateItem#api-license)
+* [How to use this API in server](https://github.com/ProjectTL12345/CreateItem#how-to-use-this-api-in-server)
+* [API Build](https://github.com/ProjectTL12345/CreateItem#api-build)
+* [How to use this API dependency](https://github.com/ProjectTL12345/CreateItem#how-to-use-this-api-dependency)
+
 ## API Feature
 * Create item
+* Create custom item
 
 ## API License
 This API uses the GPL-3.0 open source license.
@@ -16,6 +23,8 @@ To use a plugin using this dependency library, you need to do the following:
 * Step 2: Please add this dependency library to your plugins folder.
 
 If you did the above, you can use the plugin using this dependency.
+### Dependency Library
+* [InventoryGUI](https://github.com/ProjectTL12345/InventoryGUI)
 
 ## API Build
 
@@ -30,12 +39,12 @@ If you did the above, you can use the plugin using this dependency.
 
 <dependency>
   <groupId>com.github.ProjectTL12345</groupId>
-  <artifactId>InventoryGUI</artifactId>
+  <artifactId>CreateItem</artifactId>
   <version>VERSION</version>
 </dependency>
 ```
 
-* Gradle
+* Gradle (Groovy DSL)
 ```groovy
 repositories {
   jcenter()
@@ -45,7 +54,7 @@ repositories {
 }
 
 dependencies {
-  compileOnly 'com.github.ProjectTL12345:InventoryGUI:VERSION'
+  compileOnly 'com.github.ProjectTL12345:CreateItem:VERSION'
 }
 ```
 
@@ -58,98 +67,75 @@ repositories {
 
 dependencies {
   jcenter()
-  compileOnly("com.github.ProjectTL12345:InventoryGUI:VERSION")
+  compileOnly("com.github.ProjectTL12345:CreateItem:VERSION")
 }
 ```
 
 ## How to use this API dependency
-### Making inventory gui items
+### Making normal item
 
 * Java
 ```Java
-public void onExample() {
-  Inventory inventory = Bukkit.createInventory(null, 27, "Test GUI");
-  AddGuiItem setItem = new AddGuiItem(); // Please define this class!
-  
-  setItem.onCreateItem(
-    inventory, // Get your own inventory
-    26, // Item Location
-    Material.BARRIER, // Item Type
-    ChatColor.GREEN + "Test", // Item Name
-    Arrays.asList(ChatColor.BLUE + "This is Real Test."), // Item Lore
-    1, // Item Amount
-    false // Set Enchantment false or true
-  );
+public void onExample(Player targetPlayer) {
+  CreateItem item = new CreateItem();
+  item.addItem(Material.DIAMOND_SWORD, 1, targetPlayer);
+}
+```
+
+* Groovy
+```Groovy
+void onExample(Player targetPlayer) {
+  CreateItem item = new CreateItem()
+  item.addItem(Material.DIAMOND_SWORD, 1, targetPlayer)
 }
 ```
   
 * Kotlin
-```Java
-fun onExample() {
-  val inventory = Bukkit.createInventory(null, 27, "Test GUI")
-  val setItem = AddGuiItem() // Please define this class!
-  
-  setItem.onCreateItem(
-    inventory, // Get your own inventory
-    26, // Item Location
-    Material.BARRIER, // Item Type
-    "${ChatColor.GREEN}Test", // Item Name
-    Arrays.asList("${ChatColor.BLUE}This is Real Test."), // Item Lore
-    1, // Item Amount
-    false // Set Enchantment false or true
-  )
+```Kotlin
+fun onExample(targetPlayer: Player) {
+  val item = CreateItem()
+  item.addItem(Material.DIAMOND_SWORD, 1, targetPlayer)
 }
 ```
 
 * Scala
 ```Scala
-def onExample(): Unit = {
-  val inventory = Bukkit.createInventory(null, 27, "Test GUI")
-  val setItem = new AddGuiItem() // Please define this class!
-  
-  setItem.onCreateItem(
-    inventory, // Get your own inventory
-    26, // Item Location
-    Material.BARRIER, // Item Type
-    s"${ChatColor.GREEN}Test", // Item Name
-    Arrays.asList(s"${ChatColor.BLUE}This is Real Test."), // Item Lore
-    1, // Item Amount
-    false // Set Enchantment false or true
-  )
+fun onExample(targetPlayer: Player): Unit = {
+  val item = CreateItem()
+  item.addItem(Material.DIAMOND_SWORD, 1, targetPlayer)
 }
 ```
 
-### Exit inventory listener
+### Making custom item
 
 * Java
 ```Java
-public void onExample() {
-  Inventory inventory = Bukkit.createInventory(null, 27, "Test GUI");
-  AddGuiItem setItem = new AddGuiItem(); // Please define this class!
-  --- // Ignore it
-  
-  setItem.onCreateExitButton(inventory, 26);
+public void onExample(Player targetPlayer) {
+  CreateItem item = new CreateItem();
+  item.addCustomItem(Material.DIAMOND_SWORD, 1, targetPlayer, ChatColor.GREEN + "Test", null");
+}
+```
+
+* Groovy
+```Groovy
+void onExample(Player targetPlayer) {
+  CreateItem item = new CreateItem()
+  item.addCustomItem(Material.DIAMOND_SWORD, 1, targetPlayer, "${ChatColor.GREEN}Test", null") // Parentheses can be omitted
 }
 ```
   
 * Kotlin
-```Java
-fun onExample() {
-  val inventory = Bukkit.createInventory(null, 27, "Test GUI")
-  val setItem = AddGuiItem() // Please define this class!
-  --- // Ignore it
-  
-  setItem.onCreateExitButton(inventory, 26)
+```Kotlin
+fun onExample(targetPlayer: Player) {
+  val item = CreateItem()
+  item.addCustomItem(Material.DIAMOND_SWORD, 1, targetPlayer, "${ChatColor.GREEN}Test", null")
 }
 ```
 
 * Scala
 ```Scala
-def onExample(): Unit = {
-  val inventory = Bukkit.createInventory(null, 27, "Test GUI")
-  val setItem = new AddGuiItem() // Please define this class!
-  --- // Ignore it
-  
-  setItem.onCreateExitButton(inventory, 26)
+fun onExample(targetPlayer: Player): Unit = {
+  val item = CreateItem()
+  item.addCustomItem(Material.DIAMOND_SWORD, 1, targetPlayer, "${ChatColor.GREEN}Test", null")
 }
 ```
